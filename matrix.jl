@@ -38,3 +38,12 @@ end
 function DiscreteTime(w, r, x)
 	w * inv(x * eye(N) + r)
 end
+
+function Print(M)
+	for i = 1:N
+		for j = 1:N
+			@printf("%.4f ", M[i, j])
+		end
+			@printf("\n")
+	end
+end
