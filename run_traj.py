@@ -1,8 +1,9 @@
 import os
 
-tobs=5000
-kobs=10000
+tobs=1000
+Trng = [float(idx) / 20 for idx in range(2, 13)]
 
-for it in range(0,11):
-    temp = 0.10 + float(it) / 20
-    os.system("julia traj_ensemble.jl %.4f %d %d > traj-%d.dat" %(temp, tobs, kobs, it))
+for Temp in Trng:
+	print(Temp)
+	File = 'Traj_T_%.2f.csv' %Temp
+	os.system('julia s_ensemble.jl %.4f %d > %s' %(Temp, tobs, File))

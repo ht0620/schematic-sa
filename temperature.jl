@@ -12,11 +12,11 @@ H = Matrix.Hamiltonian()
 # vector
 p0 = zeros(Matrix.N)
 pj = zeros(Matrix.N)
-p0[4:6] = 1 / 3
+p0[3] = 1
 pj[1:Matrix.N] = 1
 
 # iteration
-@printf("# 1 temp, 2 t_obs / <K>, 3 P_bound, 4 E(t), 5 C(t)\n")
+@printf("1 temp,2 t_obs/<K>,3 P_bound,E(t),4 C(t)\n")
 
 temp = 0.01
 
@@ -39,9 +39,9 @@ while temp < 2
 	zm = log(dot(pj, expm(Wm * tobs) * p0)) / tobs
 	k = - (zp - zm) / (2 * ds)
 
-	@printf("%.16f %.16f ", temp, 1 / k)
-	@printf("%.16f ", pt[Matrix.N - 1] + pt[Matrix.N])
-	@printf("%.16f %.16f\n", Et, Ct)
+	@printf("%.16f,%.16f,", temp, 1 / k)
+	@printf("%.16f,", pt[Matrix.N - 1] + pt[Matrix.N])
+	@printf("%.16f,%.16f\n", Et, Ct)
 
 	temp += 0.01
 end

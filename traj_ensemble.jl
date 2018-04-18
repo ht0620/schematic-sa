@@ -34,14 +34,14 @@ for ib = -500:500
 	dW= Matrix.ContinousTime(w, r, s + ds)
 
 	# discrete time
-	T = Matrix.DiscreteTime(w, r, x)
-	dT= Matrix.DiscreteTime(w, r, x + dx)
+#	T = Matrix.DiscreteTime(w, r, x)
+#	dT= Matrix.DiscreteTime(w, r, x + dx)
 
 	# generating function (finite)
 	zs = dot(pj, expm(tobs * W) * p0)
 	zd = dot(pj, expm(tobs *dW) * p0)
-	qx = dot(pj, T ^ kobs * p0)
-	qd = dot(pj,dT ^ kobs * p0)
+#	qx = dot(pj, T ^ kobs * p0)
+#	qd = dot(pj,dT ^ kobs * p0)
 
 	# energy, susceptibility (finite)
 	Et = dot(pj, H * expm(tobs * W) * p0) / zs
@@ -52,18 +52,18 @@ for ib = -500:500
 	# large deviation function (finite)
 	zs = log(zs) / tobs
 	zd = log(zd) / tobs
-	qx = log(qx) / kobs
-	qd = log(qd) / kobs
+#	qx = log(qx) / kobs
+#	qd = log(qd) / kobs
 
 	# generating function (infinite)
 	U = eigmax(W)
 	dU= eigmax(dW)
-	V = eigmax(T)
-	dV= eigmax(dT)
+#	V = eigmax(T)
+#	dV= eigmax(dT)
 
 	# activity, time (infinite)
 	K = (U - dU) / ds
-	t = (V - dV) / dx
+#	t = (V - dV) / dx
 
 	# output (infinite)
 	@printf("%.8f, %.8f, %.8f, %.8f, %.8f, ", s, U, K, V, t)

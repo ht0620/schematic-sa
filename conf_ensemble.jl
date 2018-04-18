@@ -26,13 +26,13 @@ Tm= Matrix.DiscreteTime(w, r,-dx)
 # vector
 p0 = zeros(Matrix.N)
 pj = zeros(Matrix.N)
-p0[4:6] = 1 / 3
+p0[3] = 1
 pj[1:Matrix.N] = 1
 
 # iteration
-tobs = 1.0
+tobs = 0.01
 
-@printf("# 1 t_obs, 2 t_obs / <K>, 3 P_bound, 4 E(t), 5 C(t)\n")
+@printf("0 t_obs,1 t_obs/<K>,2 P_bound,3 E(t),4 C(t)\n")
 
 while tobs < Tmax
 	pt = expm(W * tobs) * p0
@@ -44,9 +44,9 @@ while tobs < Tmax
 	zm = log(dot(pj, expm(Wm * tobs) * p0)) / tobs
 	k = - (zp - zm) / (2 * ds)
 
-	@printf("%.16f %.16f ", tobs, 1 / k)
-	@printf("%.16f ", pt[Matrix.N - 1] + pt[Matrix.N])
-	@printf("%.16f %.16f\n", Et, Ct)
+	@printf("%.16f,%.16f,", tobs, 1 / k)
+	@printf("%.16f,", pt[Matrix.N])
+	@printf("%.16f,%.16f\n", Et, Ct)
 
 	tobs *= 1.1
 end
